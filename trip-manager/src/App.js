@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {init as firebaseInit} from './javascripts/firebase';
 import {Provider} from 'react-redux'
-import configureStore from './configureStore'
+import configureStore from './components/configureStore';
 import logo from './logo.svg';
 import './App.css';
 
