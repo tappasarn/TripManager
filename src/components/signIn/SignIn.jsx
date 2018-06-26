@@ -1,8 +1,9 @@
 import React from 'react';
+import { signInWithGmailAcc } from '../../javascripts/auth';
 
 const SignIn = () => {
     return (
-        <div>
+        <div onClick={signInWithGmailAcc}>
             Sign In Page
         </div>
     );

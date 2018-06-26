@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import 'firebase/auth';
 import tripModel from '../javascripts/models/trip';
 let database;
+let auth; 
 
 const init = () => {
     var config = {
@@ -14,6 +15,7 @@ const init = () => {
     };
     firebase.initializeApp(config);
     database = firebase.database()
+    auth = firebase.auth();
 };
 
 const getAllTripsDbRef = () => {
@@ -33,13 +35,18 @@ const addNewTrip = (id, name) => {
     });
 };
 
-const getFireBaseAuthentication = () => {
-    return firebase.auth();
+const getGoogleAuthProvider = () => {
+    return new firebase.auth.GoogleAuthProvider();
 }
+
+const getFireBaseAuthObject = () => {
+    return auth || console.log('auth is being call before firebase is init');
+};
 
 export {
     init,
     getAllTripsDbRef,
     addNewTrip,
-    getFireBaseAuthentication,
+    getGoogleAuthProvider,
+    getFireBaseAuthObject,
 };
