@@ -15,7 +15,7 @@ export const init = () => {
     database = firebase.database()
 };
 
-export const getTripDbRef = () => {
+export const getAllTripsDbRef = () => {
     return database.ref().child('trips').once('value');
 };
 
