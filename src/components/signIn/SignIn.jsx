@@ -9,4 +9,4 @@ const SignIn = () => {
 };
 
 SignIn.displayName = 'SignIn';
-export default SignIn;
+export { SignIn };

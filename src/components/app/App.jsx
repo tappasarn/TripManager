@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import {Provider} from 'react-redux'
-import {init as firebaseInit} from '../../javascripts/firebase';
+import { Provider } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
+
+import { init as firebaseInit } from '../../javascripts/firebase';
 import configureStore from '../configureStore';
-import logo from '../../logo.svg';
+import { Home } from '../home/Home';
+import { SignIn } from '../signIn/SignIn';
+import { Navigation } from '../navigation/Navigation';
+import * as routes from '../../constant/routes';
+
 import './App.css';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     firebaseInit();
     this.store = configureStore();
@@ -15,15 +24,20 @@ class App extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-        </div>
+        <Router>
+          <div>
+            <Navigation />
+            <hr />
+            <Route
+              exact path={routes.SIGN_IN}
+              component={() => <SignIn />}
+            />
+            <Route
+              exact path={routes.HOME}
+              component={() => <Home />}
+            />
+          </div>
+        </Router>
       </Provider>
     );
   }
