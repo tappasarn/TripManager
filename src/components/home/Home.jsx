@@ -1,4 +1,5 @@
 import React from 'react';
+import { withAuthorization } from '../withAuthorization';
 
 const Home = () => {
     return (
@@ -9,4 +10,6 @@ const Home = () => {
 };
 
 Home.displayName = 'Home';
-export { Home };
+const authCondition = (authUser) => !!authUser;
+const homeWithAuthorization = withAuthorization(authCondition)(Home);
+export { homeWithAuthorization as Home };

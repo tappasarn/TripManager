@@ -38,6 +38,7 @@ const styles = theme => ({
     },   
 });
 
+// TODO : this is still un-sync with Auth object from firebase
 const INIT_STATE = {
     userName: null,
     isLogin: false,
