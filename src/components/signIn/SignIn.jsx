@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { signInWithGmailAcc } from '../../javascripts/auth';
+import { withRouter } from 'react-router-dom';
+import * as route from '../../constant/routes';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -36,7 +38,7 @@ const styles = theme => ({
     },   
 });
 
-const initState = {
+const INIT_STATE = {
     userName: null,
     isLogin: false,
 }
@@ -44,39 +46,38 @@ const initState = {
 class SignIn extends Component{
     constructor(props){
         super(props);
-        this.state = {...initState};
+        this.state = {...INIT_STATE};
     }
     getCssClass = () => {
         const { classes } = this.props;
         return classes;
     }
+    getRouteHistoryOnject = () => {
+        const { history } = this.props;
+        return history;
+    }
     signInFullfillment = (result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const token = result.credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-
-        this.setState((prevState, props) => {
+        this.setState(() => {
             return {
                 userName: result.user.displayName,
                 isLogin: !!result.user.displayName, 
             }
-        });
+        }, this.redirectToHomePage);
     }
     handleRejection = (error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential;
+        console.log('sign in error', error);
     }
-    onSignIn = () => {
+    onSignIn = (event) => {
         const signInPromise = signInWithGmailAcc();
         signInPromise
             .then(this.signInFullfillment)
             .catch(((error) => {
                 this.handleRejection(error);
             }));
+        event.preventDefault();
+    }
+    redirectToHomePage = () => {
+        this.getRouteHistoryOnject().push(route.HOME);
     }
     render() {
         return (
@@ -99,4 +100,5 @@ class SignIn extends Component{
 }
 
 const signInWithStyle = withStyles(styles)(SignIn);
-export { signInWithStyle as SignIn }; 
+const SignInWithStyleAndRedirect = withRouter(signInWithStyle);
+export { SignInWithStyleAndRedirect as SignIn }; 
