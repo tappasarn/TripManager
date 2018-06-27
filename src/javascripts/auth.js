@@ -3,7 +3,6 @@ import { getGoogleAuthProvider, getFireBaseAuthObject } from './firebase';
 // Sign up with Gmail account
 const signInWithGmailAcc = () => {
     const provider = getGoogleAuthProvider();
-    console.log(getFireBaseAuthObject());
     getFireBaseAuthObject().signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const token = result.credential.accessToken;
