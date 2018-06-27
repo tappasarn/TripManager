@@ -9,7 +9,6 @@ import { init as firebaseInit } from '../../javascripts/firebase';
 import configureStore from '../configureStore';
 import { Home } from '../home/Home';
 import { SignIn } from '../signIn/SignIn';
-import { Navigation } from '../navigation/Navigation';
 import * as routes from '../../constant/routes';
 
 import './App.css';
@@ -26,8 +25,6 @@ class App extends Component {
       <Provider store={this.store}>
         <Router>
           <div>
-            <Navigation />
-            <hr />
             <Route
               exact path={routes.SIGN_IN}
               component={() => <SignIn />}
