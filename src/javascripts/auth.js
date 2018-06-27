@@ -1,6 +1,6 @@
 import { getGoogleAuthProvider, getFireBaseAuthObject } from './firebase';
 
-// Sign up with Gmail account
+// Sign in with Gmail account
 const signInWithGmailAcc = () => {
     const provider = getGoogleAuthProvider();
     getFireBaseAuthObject().signInWithPopup(provider).then(function (result) {
@@ -15,6 +15,11 @@ const signInWithGmailAcc = () => {
         // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
     });
+};
+
+// Sign out
+const signOut = () => {
+    getFireBaseAuthObject().signOut();
 };
 
 export { signInWithGmailAcc };
