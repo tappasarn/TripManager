@@ -14,7 +14,7 @@ const styles = theme => ({
         width: '30em',
         height: '18em',
         marginTop: '-9em', /*set to a negative number 1/2 of your height*/
-        marginLeft: '-15em', /*set to a negative number 1/2 of your width*/
+        marginLeft: '-17em', /*set to a negative number 1/2 of your width*/
     }),
     header: {
         marginTop: '50px',
@@ -54,18 +54,27 @@ class SignIn extends Component{
         const token = result.credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user.displayName);
+
+        this.setState((prevState, props) => {
+            return {
+                userName: result.user.displayName,
+                isLogin: !!result.user.displayName, 
+            }
+        });
+    }
+    handleRejection = (error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
     }
     onSignIn = () => {
         const signInPromise = signInWithGmailAcc();
         signInPromise
             .then(this.signInFullfillment)
             .catch(((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                const credential = error.credential;
+                this.handleRejection(error);
             }));
     }
     render() {
