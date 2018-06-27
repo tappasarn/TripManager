@@ -18,9 +18,10 @@ const styles = theme => ({
     }),
     header: {
         marginTop: '50px',
+        marginBottom: '20px'
     },
     paragraph: {
-        marginTop: '80px',
+        marginTop: '60px',
     },
     button: {
         marginTop: '20px',
@@ -84,6 +85,7 @@ class SignIn extends Component{
                     <Typography className={this.getCssClass().header} variant="headline" component="h1">
                         Sign In to your account
                     </Typography>
+                    <hr/>
                     <Typography className={this.getCssClass().paragraph} component="p">
                         Start using TripManager with following service
                     </Typography>
