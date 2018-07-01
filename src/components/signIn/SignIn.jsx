@@ -18,6 +18,12 @@ const styles = theme => ({
         height: '18em',
         marginTop: '-9em', /*set to a negative number 1/2 of your height*/
         marginLeft: '-17em', /*set to a negative number 1/2 of your width*/
+        [theme.breakpoints.down('xs')]: {
+            width: '18em',
+            height: '17em',
+            marginTop: '-13.5em',         
+            marginLeft: '-10em',
+        }
     }),
     header: {
         marginTop: '50px',
