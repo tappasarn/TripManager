@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { signInWithGmailAcc } from '../../javascripts/auth';
 import { withRouter } from 'react-router-dom';
 import * as route from '../../constant/routes';
+import { getFireBaseAuthObject } from '../../javascripts/firebase';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -35,19 +36,16 @@ const styles = theme => ({
     },
     leftIcon: {
         marginLeft: theme.spacing.unit,
-    },   
+    },
 });
 
-// TODO : this is still un-sync with Auth object from firebase
-const INIT_STATE = {
-    userName: null,
-    isLogin: false,
-}
-
-class SignIn extends Component{
-    constructor(props){
-        super(props);
-        this.state = {...INIT_STATE};
+class SignIn extends Component {
+    componentDidMount() {
+        getFireBaseAuthObject().onAuthStateChanged(authUser => {
+            if (!!authUser) {
+                this.redirectToHomePage();
+            }
+        });
     }
     getCssClass = () => {
         const { classes } = this.props;
@@ -57,24 +55,8 @@ class SignIn extends Component{
         const { history } = this.props;
         return history;
     }
-    signInFullfillment = (result) => {
-        this.setState(() => {
-            return {
-                userName: result.user.displayName,
-                isLogin: !!result.user.displayName, 
-            }
-        }, this.redirectToHomePage);
-    }
-    handleRejection = (error) => {
-        console.log('sign in error', error);
-    }
     onSignIn = (event) => {
-        const signInPromise = signInWithGmailAcc();
-        signInPromise
-            .then(this.signInFullfillment)
-            .catch(((error) => {
-                this.handleRejection(error);
-            }));
+        signInWithGmailAcc();
         event.preventDefault();
     }
     redirectToHomePage = () => {
@@ -87,7 +69,7 @@ class SignIn extends Component{
                     <Typography className={this.getCssClass().header} variant="headline" component="h1">
                         Sign In to your account
                     </Typography>
-                    <hr/>
+                    <hr />
                     <Typography className={this.getCssClass().paragraph} component="p">
                         Start using ShallWe with following service
                     </Typography>
