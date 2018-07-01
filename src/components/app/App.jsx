@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
+import { withAuthentication } from '../withAuthentication';
 import {
   BrowserRouter as Router,
   Route,
@@ -40,4 +41,5 @@ class App extends Component {
   }
 }
 
-export default App;
+const appWithAuthentication = withAuthentication(App);
+export { appWithAuthentication as App};
