@@ -1,9 +1,10 @@
 import React from 'react';
 import { withAuthorization } from '../withAuthorization';
+import { signOut } from '../../javascripts/auth';
 
 const Home = () => {
     return (
-        <div>
+        <div onClick={signOut}>
             Home page
         </div>
     );

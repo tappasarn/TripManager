@@ -13,4 +13,4 @@ const signOut = () => {
     getFireBaseAuthObject().signOut();
 };
 
-export { signInWithGmailAcc };
+export { signInWithGmailAcc, signOut };
