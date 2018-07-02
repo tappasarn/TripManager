@@ -37,7 +37,8 @@ const styles = theme => ({
         border: '1px solid #dd4b39',
         color: '#dd4b39',
         '&:hover': {
-            backgroundColor: 'white',
+            backgroundColor: '#dd4b39',
+            color: 'white',
         },
     },
     leftIcon: {
