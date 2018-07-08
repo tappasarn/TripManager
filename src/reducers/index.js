@@ -1,4 +1,4 @@
-import trip from './trip';
+import user from './user';
 import {combineReducers} from 'redux';
 
-export default combineReducers({trip});
+export default combineReducers({user});
