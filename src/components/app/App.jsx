@@ -33,10 +33,6 @@ class App extends Component {
               exact path={routes.SIGN_IN}
               component={() => <SignIn />}
             />
-            <Route
-              exact path="*"
-              component={() => <SignIn />}
-            />
           </div>
         </Router>
       </Provider>
