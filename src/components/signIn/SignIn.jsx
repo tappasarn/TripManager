@@ -7,6 +7,8 @@ import { signInWithGmailAcc } from '../../javascripts/auth';
 import { withRouter } from 'react-router-dom';
 import * as route from '../../constant/routes';
 import { getFireBaseAuthObject } from '../../javascripts/firebase';
+import { connect } from 'react-redux';
+import { addAuthUser } from '../../actions/actionCreator';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -21,7 +23,7 @@ const styles = theme => ({
         [theme.breakpoints.down('xs')]: {
             width: '18em',
             height: '17em',
-            marginTop: '-13.5em',         
+            marginTop: '-13.5em',
             marginLeft: '-10em',
         }
     }),
@@ -49,8 +51,19 @@ const styles = theme => ({
 class SignIn extends Component {
     componentDidMount() {
         getFireBaseAuthObject().onAuthStateChanged(authUser => {
+            console.log('authUser when component just mounted', authUser);
             if (!!authUser) {
-                this.redirectToHomePage();
+                // firebase app user and redux appuser should be sync in the beginning og the app
+                console.log('authuser pass');
+                if (!this.props.authUser) {
+                    const customAuthUser = {
+                        uid: authUser.uid,
+                        name: authUser.displayName,
+                    };
+                    console.log('customuser pass');
+                    this.props.addAuthUser(customAuthUser);
+                } 
+                this.redirectToHomePage();         
             }
         });
     }
@@ -63,7 +76,18 @@ class SignIn extends Component {
         return history;
     }
     onSignIn = (event) => {
-        signInWithGmailAcc();
+        console.log('sign in');
+        signInWithGmailAcc().then(authUser => {
+            const customAuthUser = {
+                uid: authUser.user.uid,
+                name: authUser.user.displayName,
+            };
+            
+            this.props.addAuthUser(customAuthUser);
+            console.log('sign in done');
+        }).catch((e) => {
+            this.props.addAuthUser(null);
+        });
         event.preventDefault();
     }
     redirectToHomePage = () => {
@@ -89,6 +113,17 @@ class SignIn extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        authUser: state.user.authUser,
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    addAuthUser: value => dispatch(addAuthUser(value))
+});
+
 const signInWithStyle = withStyles(styles)(SignIn);
 const SignInWithStyleAndRedirect = withRouter(signInWithStyle);
-export { SignInWithStyleAndRedirect as SignIn }; 
+const SignInWithRedux = connect(mapStateToProps, mapDispatchToProps)(SignInWithStyleAndRedirect);
+export { SignInWithRedux as SignIn }; 
