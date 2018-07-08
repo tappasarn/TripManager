@@ -51,19 +51,17 @@ const styles = theme => ({
 class SignIn extends Component {
     componentDidMount() {
         getFireBaseAuthObject().onAuthStateChanged(authUser => {
-            console.log('authUser when component just mounted', authUser);
             if (!!authUser) {
-                // firebase app user and redux appuser should be sync in the beginning og the app
-                console.log('authuser pass');
+                // Sync FireBase authUser object and Redux authUser object here
+                // TODO: this logic need to be moved to a better place
                 if (!this.props.authUser) {
                     const customAuthUser = {
                         uid: authUser.uid,
                         name: authUser.displayName,
                     };
-                    console.log('customuser pass');
                     this.props.addAuthUser(customAuthUser);
-                } 
-                this.redirectToHomePage();         
+                }
+                this.redirectToHomePage();
             }
         });
     }
@@ -76,18 +74,19 @@ class SignIn extends Component {
         return history;
     }
     onSignIn = (event) => {
-        console.log('sign in');
-        signInWithGmailAcc().then(authUser => {
-            const customAuthUser = {
-                uid: authUser.user.uid,
-                name: authUser.user.displayName,
-            };
-            
-            this.props.addAuthUser(customAuthUser);
-            console.log('sign in done');
-        }).catch((e) => {
-            this.props.addAuthUser(null);
-        });
+        signInWithGmailAcc()
+            .then(authUser => {
+                const customAuthUser = {
+                    uid: authUser.user.uid,
+                    name: authUser.user.displayName,
+                };
+                this.props.addAuthUser(customAuthUser);
+                // no need to redirect to home page here
+                // it is already handled in componentDidMount
+            })
+            .catch((e) => {
+                this.props.addAuthUser(null);
+            });
         event.preventDefault();
     }
     redirectToHomePage = () => {
@@ -126,4 +125,5 @@ const mapDispatchToProps = dispatch => ({
 const signInWithStyle = withStyles(styles)(SignIn);
 const SignInWithStyleAndRedirect = withRouter(signInWithStyle);
 const SignInWithRedux = connect(mapStateToProps, mapDispatchToProps)(SignInWithStyleAndRedirect);
-export { SignInWithRedux as SignIn }; 
+
+export { SignInWithRedux as SignIn };

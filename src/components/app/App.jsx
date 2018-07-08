@@ -41,5 +41,4 @@ class App extends Component {
   }
 }
 
-//const appWithAuthentication = withAuthentication(App);
 export { App };
