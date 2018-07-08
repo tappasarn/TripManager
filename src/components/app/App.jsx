@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
-import { withAuthentication } from '../withAuthentication';
 import {
   BrowserRouter as Router,
   Route,
