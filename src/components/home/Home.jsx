@@ -10,5 +10,5 @@ Home.displayName = 'Home';
 
 const authCondition = (authUser) => !!authUser;
 const homeWithAuthorization = withAuthorization(authCondition)(Home);
-const homeWithAuthorizationAndNavigator = withNavigator()(homeWithAuthorization);
+const homeWithAuthorizationAndNavigator = withNavigator('Home')(homeWithAuthorization);
 export { homeWithAuthorizationAndNavigator as Home };

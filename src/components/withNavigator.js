@@ -38,7 +38,7 @@ const styles = {
     },
 };
 
-const withNavigator = () => Component => {
+const withNavigator = (pageName) => Component => {
     class WithNavigator extends React.Component {
         constructor(props) {
             super(props);
@@ -83,7 +83,7 @@ const withNavigator = () => Component => {
                                     <i className="fas fa-bars"></i>
                                 </IconButton>
                                 <Typography variant="title" color="inherit" className={classes.flex}>
-                                    WhoIsGone
+                                    {pageName}
                         </Typography>
                                 <Button color="inherit" onClick={signOut}>Logout</Button>
                             </Toolbar>
