@@ -18,9 +18,6 @@ import { Link } from 'react-router-dom';
 import { signOut } from '../javascripts/auth';
 import * as route from '../constant/routes';
 
-// css
-import './withNavigator.css';
-
 // styles constant
 const styles = {
     root: {
@@ -35,10 +32,10 @@ const styles = {
     },
     appBar: {
         backgroundColor: 'black',
-        position: 'fixed',
-        top: 0,
-        left: 0,
     },
+    link: {
+        textDecoration: 'none',
+    }
 };
 
 const withNavigator = (pageName) => Component => {
@@ -61,7 +58,7 @@ const withNavigator = (pageName) => Component => {
                         <ListItemText primary="WhoIsGone" />
                     </ListItem>
                     <Divider />
-                    <Link to={route.HOME} className="link--nounderline">
+                    <Link to={route.HOME} className={this.props.classes.link}>
                         <ListItem button>
                                 <ListItemIcon>
                                     <i className="fas fa-home"></i>
@@ -69,7 +66,7 @@ const withNavigator = (pageName) => Component => {
                                 <ListItemText primary="Home" />
                         </ListItem>
                     </Link>
-                    <Link to={route.CREATE} className="link--nounderline">
+                    <Link to={route.CREATE} className={this.props.classes.link}>
                         <ListItem button>
                                 <ListItemIcon>
                                     <i className="fas fa-plus-circle"></i>
