@@ -66,6 +66,14 @@ const withNavigator = (pageName) => Component => {
                                 <ListItemText primary="Home" />
                         </ListItem>
                     </Link>
+                    <Link to={route.CREATE} className="link--nounderline">
+                        <ListItem button>
+                                <ListItemIcon>
+                                    <i className="fas fa-plus-circle"></i>
+                                </ListItemIcon>
+                                <ListItemText primary="Create" />
+                        </ListItem>
+                    </Link>
                 </List>
             );
         }
