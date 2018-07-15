@@ -22,7 +22,7 @@ const styles = theme => ({
     marginLeft: '-17em', /*set to a negative number 1/2 of your width*/
     [theme.breakpoints.down('xs')]: {
       width: '100%',
-      height: 'auto',
+      height: '92vh',
       marginTop: 0,
       marginLeft: 0,
       position:'relative',
@@ -46,7 +46,7 @@ function Home(props) {
 
   return (
     <List className={classes.root} subheader={<li />}>
-      {[0, 1, 2, 3, 4].map(sectionId => (
+      {[0, 1, 2, 3, 4, 5].map(sectionId => (
         <li key={`section-${sectionId}`} className={classes.listSection}>
           <ul className={classes.ul}>
             <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
