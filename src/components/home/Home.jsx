@@ -9,7 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-
+// TODO: fetch user trips according to UID in redux state here
+// should be done in component did mount
 const styles = theme => ({
   root: {
     textAlign: 'left',
