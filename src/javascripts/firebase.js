@@ -23,18 +23,30 @@ const getAllTripsDbRef = () => {
 };
 
 /**
- * this function still have to verify repleated user before adding it
- * so we wont update firebase too often
+ * this function is only to verify and add new user to firebase
  */
 const addNewUser = (uid, name) => {
     return new Promise((resolve, reject) => {
         database.ref().child('users').once('value').then((usersDb) => {
             let users = usersDb.val() || [];
-            const updatedUser = {...users, [uid]: userModel(uid, name)};
-            database.ref().child('users').set(updatedUser)
-                .then(res => resolve(res))
-                .catch(error => reject(error));
+            // only add if new user
+            if(!users[uid]){
+                const updatedUser = {...users, [uid]: userModel(uid, name)};
+                database.ref().child('users').set(updatedUser)
+                    .then(res => resolve(res))
+                    .catch(error => reject(error));
+            }
         });
+    });
+}
+
+const fetchTripsByUserId = (uid) => {
+    database.ref().child('users').once('value').then((usersDb) => {
+        let users = usersDb.val() || [];
+        if(users[uid]){
+           return users[uid].trips || []; 
+        }
+        return [];
     });
 }
 
@@ -65,4 +77,5 @@ export {
     addNewUser,
     getGoogleAuthProvider,
     getFireBaseAuthObject,
+    fetchTripsByUserId,
 };
