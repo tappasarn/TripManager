@@ -80,6 +80,7 @@ const withNavigator = (pageName) => Component => {
 
         // Navigator consis of AppBar and Drawer
         // these two are page skeleton
+        // TODO: should clear user in redux everytime signout perform
         render() {
             const { classes } = this.props;
             return (
