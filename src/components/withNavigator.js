@@ -55,7 +55,7 @@ const withNavigator = (pageName) => Component => {
             return (
                 <List>
                     <ListItem button={false}>
-                        <ListItemText primary="WhoIsGone" />
+                        <ListItemText primary="Joinner.io" />
                     </ListItem>
                     <Divider />
                     <Link to={route.HOME} className={this.props.classes.link}>
