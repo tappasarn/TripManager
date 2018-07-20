@@ -17,10 +17,10 @@ const styles = theme => ({
     position: 'fixed',
     top: '50%',
     left: '50%',
-    width: '30em',
+    width: '60em',
     height: '40em',
     marginTop: '-18em', /*set to a negative number 1/2 of your height*/
-    marginLeft: '-17em', /*set to a negative number 1/2 of your width*/
+    marginLeft: '-30em', /*set to a negative number 1/2 of your width*/
     [theme.breakpoints.down('xs')]: {
       width: '100%',
       height: '92vh',
