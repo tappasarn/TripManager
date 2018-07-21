@@ -18,8 +18,8 @@ const init = () => {
     auth = firebase.auth();
 };
 
-const getAllTripsDbRef = () => {
-    return database.ref().child('trips').once('value');
+const getTripInfoByIdPromise = (tripId) => {
+    return Promise.resolve(database.ref().child('trips').child(tripId.toString()).once('value'));
 };
 
 /**
@@ -40,15 +40,19 @@ const addNewUser = (uid, name) => {
     });
 }
 
-const fetchTripsByUserId = (uid) => {
-    database.ref().child('users').once('value').then((usersDb) => {
-        let users = usersDb.val() || [];
-        if(users[uid]){
-           return users[uid].trips || []; 
-        }
-        return [];
-    });
+const fetchUserByUid = (uid) => {
+    return Promise.resolve(database.ref().child('users').child(uid.toString()).once('value'));
 }
+
+// return new Promise((resolve, reject) => {
+//     database.ref().child('users').child(uid.toString()).once('value').then((usersDb) => {
+//         let users = usersDb.val() || [];
+//         if(users[uid]){
+//            return users[uid].trips || []; 
+//         }
+//         return [];
+//     });
+// });
 
 // const addNewTrip = (id, name) => {
 //     return new Promise((resolve, reject) => {
@@ -73,9 +77,9 @@ const getFireBaseAuthObject = () => {
 
 export {
     init,
-    getAllTripsDbRef,
+    getTripInfoByIdPromise,
     addNewUser,
     getGoogleAuthProvider,
     getFireBaseAuthObject,
-    fetchTripsByUserId,
+    fetchUserByUid,
 };
