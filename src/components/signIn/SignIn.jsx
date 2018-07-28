@@ -101,7 +101,7 @@ class SignIn extends Component {
                     </Typography>
                     <hr />
                     <Typography className={this.getCssClass().paragraph} component="p">
-                        Start using ShallWe with following service
+                        Start using Joiner.io with following service
                     </Typography>
                     <Button variant="outlined" className={this.getCssClass().button} onClick={this.onSignIn}>
                         Sign In with Google

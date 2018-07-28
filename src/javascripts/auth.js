@@ -5,7 +5,7 @@ const signInWithGmailAcc = () => {
     const provider = getGoogleAuthProvider();
     // Add Promise.resolve here to unsure a genuine Promise object 
     // return singInPopup Promise
-    return Promise.resolve(getFireBaseAuthObject().signInWithPopup(provider));
+    return Promise.resolve(getFireBaseAuthObject().signInWithRedirect(provider));
 };
 
 // Sign out
