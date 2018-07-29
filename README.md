@@ -1,4 +1,5 @@
 # Joinner.io
+![alt text](https://raw.githubusercontent.com/tappasarn/trip-manager/blob/master/public/icon-152x152.png) <br />
 This is the code base for joinner.io. This project is an application that help friends manage and plan their trip. <br />
 ## Core Implementation
 * Bootstrapped with Create React App.
