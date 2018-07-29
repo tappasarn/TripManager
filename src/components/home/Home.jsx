@@ -16,7 +16,7 @@ import { getUserPromise, getTripsNameAndDatesPromise } from '../../javascripts/t
 const styles = theme => ({
   root: {
     textAlign: 'left',
-    position: 'fixed',
+    position: 'absolute',
     top: '50%',
     left: '50%',
     width: '60em',
