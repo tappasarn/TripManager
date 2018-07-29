@@ -59,8 +59,8 @@ class Home extends Component {
         trips: convertedTripInfo,
       });
     });
-
   }
+  
   render() {
     const { classes } = this.props;
     return (
