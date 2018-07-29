@@ -51,8 +51,12 @@ const styles = theme => ({
 class SignIn extends Component {
     componentDidMount() {
         getFireBaseAuthObject().onAuthStateChanged(authUser => {
-            if (!!authUser) {
+            // if user try to land to sign-in page
+            // but auth object already cached by firebase
+            // send them back to home page
+            if (authUser) {
                 // Sync FireBase authUser object and Redux authUser object here
+                // in case, firebase already cache auth object but redux does not know
                 // TODO: this logic need to be moved to a better place
                 if (!this.props.authUser) {
                     const customAuthUser = {

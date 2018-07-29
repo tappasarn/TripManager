@@ -1,3 +1,3 @@
-export const SIGN_IN = '/'; // Always landed user to sign-in first;
-export const HOME = '/home';
+export const SIGN_IN = '/signin'; 
+export const HOME = '/'; // Always landed user to Home page if possible
 export const CREATE = '/create';
