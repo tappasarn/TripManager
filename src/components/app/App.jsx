@@ -31,12 +31,12 @@ class App extends Component {
               component={() => <Create />}
             />
             <Route
-              exact path={routes.HOME}
-              component={() => <Home />}
-            />
-            <Route
               exact path={routes.SIGN_IN}
               component={() => <SignIn />}
+            />
+            <Route
+              exact path={routes.HOME}
+              component={() => <Home />}
             />
           </div>
         </Router>
