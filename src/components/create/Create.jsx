@@ -30,7 +30,6 @@ const styles = theme => ({
 
 const Create = (props) => {
   const { classes } = props;
-  console.log(props);
   return (
     <div className='Create'>
       <Paper className={classes.root} elevation={4}>
