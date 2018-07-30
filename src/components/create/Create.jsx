@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
-  root: theme.mixins.gutters({
+  root: {
     textAlign: 'left',
     position: 'absolute',
     top: '50%',
@@ -25,7 +25,7 @@ const styles = theme => ({
     },
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto',
-  }),
+  },
 });
 
 const Create = (props) => {
