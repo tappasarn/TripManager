@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withAuthorization } from '../withAuthorization';
 import { withNavigator } from '../withNavigator';
 import { withStyles } from '@material-ui/core/styles';
@@ -39,7 +39,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
     padding: '20px 200px',
   },
-  dateContainer: {
+  dateContainerLeft: {
     marginRight: '20px',
   },
   button: {
@@ -71,77 +71,90 @@ const GetTodayDate = () => {
     year: today.getFullYear(),
   }
 }
-const Create = (props) => {
-  const { classes } = props;
-  const today = GetTodayDate();
-
-  return (
-    <div className='Create'>
-      <Paper className={classes.root} elevation={4}>
-        <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            id="trip-name"
-            label="Your trip name"
-            className={classes.textField}
-            margin="normal"
-          />
-          <div className={classes.dateContainer}>
+class Create extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      tripName: null,
+      startDate: null,
+      startTime: null,
+      endDate: null,
+      endTIme: null,
+    }
+  }
+  // defaultValue={`${today.year}-${today.month}-${today.date}`}
+  render() {
+    const { classes } = this.props;
+    const today = GetTodayDate();
+    return (
+      <div className='Create'>
+        <Paper className={classes.root} elevation={4}>
+          <form className={classes.container} noValidate autoComplete="off">
             <TextField
-              id="start-date"
-              label="Start Date"
-              type="date"
-              defaultValue={`${today.year}-${today.month}-${today.date}`}
+              id="trip-name"
+              label="Your trip name"
               className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
+              margin="normal"
+              value={this.state.tripName}
             />
+            <div className={classes.dateContainerLeft}>
+              <TextField
+                id="start-date"
+                label="Start Date"
+                type="date"   
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={this.state.startDate}
+              />
+              <TextField
+                id="end-date"
+                label="End Date"
+                type="date"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={this.state.endDate}
+              />
+            </div>
+            <div>
             <TextField
-              id="start-time"
-              label="Start Time"
-              type="time"
-              defaultValue="07:30"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{
-                step: 300, // 5 min
-              }}
-            />
-          </div>
-          <div>
-            <TextField
-              id="end-date"
-              label="End Date"
-              type="date"
-              defaultValue={`${today.year}-${today.month}-${today.date}`}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              id="end-time"
-              label="End Time"
-              type="time"
-              defaultValue="08:30"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{
-                step: 300, // 5 min
-              }}
-            />
-          </div>
-          <Button variant="outlined" className={classes.button} onClick={this.onSignIn}>
-            Create Your Trip
-          </Button>
-        </form>
-      </Paper>
-    </div>
-  );
+                id="start-time"
+                label="Start Time"
+                type="time"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 300, // 5 min
+                }}
+                value={this.state.startTime}
+              />
+              <TextField
+                id="end-time"
+                label="End Time"
+                type="time"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 300, // 5 min
+                }}
+                value={this.state.endTIme}
+              />
+            </div>
+            <Button variant="outlined" className={classes.button} onClick={this.onSignIn}>
+              Create Your Trip
+            </Button>
+          </form>
+        </Paper>
+      </div>
+    );
+  }
 }
 
 Create.displayName = 'Create';
