@@ -75,11 +75,16 @@ class Create extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tripName: null,
-      startDate: null,
-      startTime: null,
-      endDate: null,
-      endTIme: null,
+      tripName: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTIme: '',
+    }
+  }
+  handleChangeHof = (name) => {
+    return (event) => {
+      this.setState({[name]: event.target.value});
     }
   }
   // defaultValue={`${today.year}-${today.month}-${today.date}`}
@@ -96,6 +101,7 @@ class Create extends Component {
               className={classes.textField}
               margin="normal"
               value={this.state.tripName}
+              onChange={this.handleChangeHof('tripName')}
             />
             <div className={classes.dateContainerLeft}>
               <TextField
@@ -107,6 +113,7 @@ class Create extends Component {
                   shrink: true,
                 }}
                 value={this.state.startDate}
+                onChange={this.handleChangeHof('startDate')}
               />
               <TextField
                 id="end-date"
@@ -117,6 +124,7 @@ class Create extends Component {
                   shrink: true,
                 }}
                 value={this.state.endDate}
+                onChange={this.handleChangeHof('endDate')}
               />
             </div>
             <div>
@@ -132,6 +140,7 @@ class Create extends Component {
                   step: 300, // 5 min
                 }}
                 value={this.state.startTime}
+                onChange={this.handleChangeHof('startTime')}
               />
               <TextField
                 id="end-time"
@@ -145,6 +154,7 @@ class Create extends Component {
                   step: 300, // 5 min
                 }}
                 value={this.state.endTIme}
+                onChange={this.handleChangeHof('endTIme')}
               />
             </div>
             <Button variant="outlined" className={classes.button} onClick={this.onSignIn}>
