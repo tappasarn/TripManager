@@ -3,6 +3,7 @@ import { withAuthorization } from '../withAuthorization';
 import { withNavigator } from '../withNavigator';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -26,13 +27,104 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto',
   },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: '100%',
+    marginBottom: '40px',
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: '20px 200px',
+  },
+  dateContainer: {
+    marginRight: '20px',
+  }
 });
 
+const GetTodayDate = () => {
+  const today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+  return {
+    date: dd,
+    month: mm,
+    year: today.getFullYear(),
+  }
+}
 const Create = (props) => {
   const { classes } = props;
+  const today = GetTodayDate();
+  console.log(`${today.year}-${today.month}-${today.date}`);
   return (
     <div className='Create'>
       <Paper className={classes.root} elevation={4}>
+        <form className={classes.container} noValidate autoComplete="off">
+          <TextField
+            id="trip-name"
+            label="Your trip name"
+            className={classes.textField}
+            margin="normal"
+          />
+          <div className={classes.dateContainer}>
+            <TextField
+              id="start-date"
+              label="Start Date"
+              type="date"
+              defaultValue={`${today.year}-${today.month}-${today.date}`}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="start-time"
+              label="Start Time"
+              type="time"
+              defaultValue="07:30"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              id="end-date"
+              label="End Date"
+              type="date"
+              defaultValue={`${today.year}-${today.month}-${today.date}`}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id="end-time"
+              label="End Time"
+              type="time"
+              defaultValue="08:30"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+          </div>
+        </form>
       </Paper>
     </div>
   );
