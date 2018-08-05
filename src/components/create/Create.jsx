@@ -77,9 +77,9 @@ class Create extends Component {
     this.state = {
       tripName: '',
       startDate: '',
-      startTime: '',
+      startTime: '07:30',
       endDate: '',
-      endTIme: '',
+      endTIme: '08:30',
     }
   }
   handleChangeHof = (name) => {
