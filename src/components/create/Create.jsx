@@ -38,6 +38,9 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     padding: '20px 200px',
+    [theme.breakpoints.down('xs')]: {
+      padding: '20px 50px',
+    },
   },
   dateContainerLeft: {
     marginRight: '20px',
