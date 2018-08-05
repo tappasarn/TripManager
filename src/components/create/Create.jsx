@@ -4,6 +4,7 @@ import { withNavigator } from '../withNavigator';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -40,7 +41,17 @@ const styles = theme => ({
   },
   dateContainer: {
     marginRight: '20px',
-  }
+  },
+  button: {
+    marginTop: '20px',
+    width: '100%',
+    border: '1px solid #303f9f',
+    color: '#303f9f',
+    '&:hover': {
+      backgroundColor: '#303f9f',
+      color: 'white',
+    },
+  },
 });
 
 const GetTodayDate = () => {
@@ -63,7 +74,7 @@ const GetTodayDate = () => {
 const Create = (props) => {
   const { classes } = props;
   const today = GetTodayDate();
-  console.log(`${today.year}-${today.month}-${today.date}`);
+
   return (
     <div className='Create'>
       <Paper className={classes.root} elevation={4}>
@@ -124,6 +135,9 @@ const Create = (props) => {
               }}
             />
           </div>
+          <Button variant="outlined" className={classes.button} onClick={this.onSignIn}>
+            Create Your Trip
+          </Button>
         </form>
       </Paper>
     </div>
